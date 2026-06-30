@@ -16,7 +16,7 @@ https://drive.google.com/drive/folders/1EcQwg30qoVF3b2Cfkte-t1bh1ReJQ2nf?usp=dri
 ## Cấu Trúc Repo
 
 ```text
-r2ai-law-rag/
+githuv_r2ai_repo/
   app/
     server.py                         # FastAPI server
     static/                           # UI tĩnh
