@@ -1,0 +1,27 @@
+services:
+  r2ai-api:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    image: r2ai-law-rag:latest
+    environment:
+      R2AI_BASE_DIR: ${R2AI_BASE_DIR:-/app/data}
+      R2AI_DATA_DIR: ${R2AI_DATA_DIR:-/app/data}
+      R2AI_RESULTS_PATH: ${R2AI_RESULTS_PATH:-/app/data/results.json}
+      R2AI_FULL_CORPUS_PATH: ${R2AI_FULL_CORPUS_PATH:-/app/data/processed/chunks/all_chunks_safe_20260622_012757_repaired_min80_plus_vbpl100_20260626_154852.jsonl}
+      R2AI_BM25_DB_PATH: ${R2AI_BM25_DB_PATH:-/app/data/processed/index/bm25_fts5_legal_plus_vbpl100_20260626_154852.sqlite}
+      R2AI_FAISS_INDEX_PATH: ${R2AI_FAISS_INDEX_PATH:-/app/data/processed/index/qwen3_8b_dim1024_merged_plus_vbpl100_20260626_163216.index}
+      R2AI_FAISS_META_PATH: ${R2AI_FAISS_META_PATH:-/app/data/processed/index/qwen3_8b_dim1024_merged_plus_vbpl100_20260626_163216_meta.jsonl}
+      R2AI_HYDE_PATH: ${R2AI_HYDE_PATH:-/app/data/processed/query_plans/r2ai_stage1_hyde_qwen25_15b_v1.jsonl}
+      R2AI_RULE_PLAN_PATH: ${R2AI_RULE_PLAN_PATH:-/app/data/processed/query_plans/r2ai_stage1_query_plans_hybrid_rule_llm_planner_v1_utf8fixed.jsonl}
+      R2AI_RETRIEVAL_CANDIDATES_PATH: ${R2AI_RETRIEVAL_CANDIDATES_PATH:-/app/data/processed/retrieval/r2ai_stage1_hybrid_candidates_bm25plus_vbpl100_qwen3plus_20260626_170709.jsonl}
+      R2AI_GRAPH_PATH: ${R2AI_GRAPH_PATH:-/app/data/processed/graphs/vbpl_relation_graph_exact_v2.jsonl}
+      R2AI_CRAWL_INPUT: ${R2AI_CRAWL_INPUT:-/app/data/vbpl_excel_exports}
+      R2AI_CRAWL_OUT: ${R2AI_CRAWL_OUT:-/app/data/raw/vbpl_crawled}
+      R2AI_ENABLE_CRAWL_ENDPOINT: ${R2AI_ENABLE_CRAWL_ENDPOINT:-false}
+      R2AI_DEVICE: ${R2AI_DEVICE:-cpu}
+    ports:
+      - "8000:8000"
+    volumes:
+      - ./data:/app/data
+    restart: unless-stopped

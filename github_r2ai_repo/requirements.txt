@@ -1,0 +1,13 @@
+fastapi
+uvicorn[standard]
+pydantic
+python-dotenv
+pandas
+requests
+beautifulsoup4
+lxml
+tqdm
+Unidecode
+openpyxl
+ftfy
+
